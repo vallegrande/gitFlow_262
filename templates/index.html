@@ -2,10 +2,46 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sitio Web</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/alerta.js') }}" defer></script>
 </head>
-<body class="bg-gray-100">
-    <h1 class="text-3xl text-center mt-10">Bienvenidos al Sitio Web</h1>
+<body class="bg-gray-100 p-5 font-sans text-gray-800">
+    <h1 class="text-center text-3xl font-bold">Bienvenidos al Sitio Web</h1>
+    <main class="mx-auto max-w-xl">
+        <section class="my-6 rounded-lg bg-white p-5" aria-labelledby="alert-title">
+            <h2 class="mb-4 text-xl font-semibold" id="alert-title">Saludo</h2>
+            <button id="show-alert" type="button" class="cursor-pointer rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Mostrar alerta</button>
+        </section>
+        <section class="my-6 rounded-lg bg-white p-5" aria-labelledby="gallery-title">
+            <h2 class="mb-4 text-xl font-semibold" id="gallery-title">Galería</h2>
+            <div id="carousel">
+                <img class="w-full rounded" src="{{ url_for('static', filename='images/montanas.svg') }}" alt="Montañas bajo un cielo azul">
+                <img class="w-full rounded" src="{{ url_for('static', filename='images/playa.svg') }}" alt="Playa con mar y sol" hidden>
+                <img class="w-full rounded" src="{{ url_for('static', filename='images/bosque.svg') }}" alt="Árboles en un bosque" hidden>
+            </div>
+            <div class="mt-3 flex items-center justify-between">
+                <button class="cursor-pointer rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:cursor-wait disabled:opacity-50" id="prev" type="button">Anterior</button>
+                <span id="slide-number" aria-live="polite">1 / 3</span>
+                <button class="cursor-pointer rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:cursor-wait disabled:opacity-50" id="next" type="button">Siguiente</button>
+            </div>
+        </section>
+        <section class="my-6 rounded-lg bg-white p-5" aria-labelledby="contact-title">
+            <h2 class="mb-4 text-xl font-semibold" id="contact-title">Contacto</h2>
+            <p class="mb-4 text-sm text-gray-600">Formulario de prueba: el envío de correo es simulado.</p>
+            <form class="grid gap-3" id="contact-form" novalidate>
+                <label for="name">Nombre</label>
+                <input class="w-full rounded border border-gray-400 p-2" id="name" name="name" type="text" autocomplete="name" required>
+                <label for="email">Correo</label>
+                <input class="w-full rounded border border-gray-400 p-2" id="email" name="email" type="email" autocomplete="email" required>
+                <label for="message">Mensaje</label>
+                <textarea class="w-full rounded border border-gray-400 p-2" id="message" name="message" rows="4" required></textarea>
+                <button class="cursor-pointer rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:cursor-wait disabled:opacity-50" type="submit">Enviar</button>
+                <p id="form-status" role="status"></p>
+            </form>
+        </section>
+    </main>
 </body>
 </html>
